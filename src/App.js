@@ -1,24 +1,24 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Navbar from './Components/Navbar';
-import About from './Pages/About';
-import Contact from './Pages/Contact';
-import Home from './Pages/Home';
-import Login from './Pages/Login';
-import Services from './Pages/Services';
-
+import { publicRoutes } from './Routes/PublicRoutes';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 function App() {
+
+  useEffect( ()=>{
+    AOS.init();
+  },[])
+
   return (
     <div >
-
-      {/* 1.26mit */}
+     
      <Navbar>
       <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/services" element={<Services />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/login" element={<Login />} />
+      {
+        publicRoutes.map(({path,Component},index)=> <Route key={index} path={path} element={<Component/>} />)
+      }
       </Routes>
      </Navbar>
      
